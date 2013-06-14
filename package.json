@@ -1,0 +1,22 @@
+{
+  "name": "rf13",
+  "version": "0.0.0",
+  "description": "Roskilde Festival '13",
+  "dependencies": {
+    "grunt-contrib-connect": "~0.3.0",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt": "~0.4.1",
+    "grunt-contrib-less": "~0.6.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-coffee": "~0.7.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/webjay/rf13.git"
+  },
+  "author": "Jacob Friis Saxberg",
+  "bugs": {
+    "url": "https://github.com/webjay/rf13/issues"
+  }
+}

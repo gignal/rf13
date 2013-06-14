@@ -1,0 +1,9 @@
+{
+  "name": "rf13",
+  "version": "0.0.0",
+  "dependencies": {
+    "isotope": "~1.5.25",
+    "backbone": "~1.0.0",
+    "underscore": "~1.4.4"
+  }
+}
