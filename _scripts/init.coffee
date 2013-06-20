@@ -1,5 +1,3 @@
-jQuery('head').append(jQuery('<link rel="stylesheet" type="text/css" />').attr('href', '/lib/style.min.css'))
-
 jQuery ($) ->
 
   Backbone.$ = $

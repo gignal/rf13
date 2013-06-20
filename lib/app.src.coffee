@@ -168,8 +168,6 @@ class document.gignal.views.Footer extends Backbone.View
     @$el.html @serviceProfileLink.$el
     return @
 
-jQuery('head').append(jQuery('<link rel="stylesheet" type="text/css" />').attr('href', '/lib/style.min.css'))
-
 jQuery ($) ->
 
   Backbone.$ = $
