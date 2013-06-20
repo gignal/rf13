@@ -19,7 +19,7 @@ module.exports = (grunt) ->
       options:
         sourceMapRoot: 'lib'
         sourceMapIn: 'lib/app.js.map'
-        sourceMap: 'lib/app.min.js.map'
+        sourceMap: './lib/app.min.js.map'
         mangle: false
         #wrap: 'gignal'
       app:
@@ -31,32 +31,32 @@ module.exports = (grunt) ->
             'lib/app.js'
           ]
 
-    less:
-      app:
+    stylus:
+      compile:
+        options:
+          paths: ['lib']
         files: 
           'lib/style.min.css': [
-            '_scripts/app.less'
+            '_scripts/style.styl'
           ]
-        options:
-          compress: true
 
     watch:
-      less:
-        files: ['_scripts/app.less']
-        tasks: ['less']
+      stylus:
+        files: ['_scripts/*.styl']
+        tasks: ['stylus']
       coffee:
         files: ['_scripts/*.coffee']
-        tasks: ['uglify']
+        tasks: ['coffee', 'uglify']
 
     connect:
       app:
         options:
           keepalive: true
 
-  grunt.registerTask 'default', ['coffee', 'uglify', 'less']
+  grunt.registerTask 'default', ['coffee', 'uglify', 'stylus']
 
-  grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-connect'
+  grunt.loadNpmTasks 'grunt-contrib-stylus'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-uglify'

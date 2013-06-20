@@ -17,9 +17,9 @@ class Stream extends Backbone.Collection
     sinceTime: 0
 
   initialize: ->
-    @on 'add', @inset, @
+    @on 'add', @inset
     @update()
-    #@setIntervalUpdate()
+    @setIntervalUpdate()
 
   inset: (model) ->
     switch model.get 'type'
@@ -31,9 +31,13 @@ class Stream extends Backbone.Collection
           model: model
     document.gignal.widget.$el.prepend(view.render().el).isotope('reloadItems').isotope 
       sortBy: 'original-order'
+    document.gignal.widget.refresh()
 
   parse: (response) ->
     return response.stream
+    
+  comparator: (item) ->
+    return - item.get 'saved_on'
 
   update: =>
     return if @calling
@@ -50,9 +54,8 @@ class Stream extends Backbone.Collection
         cid: @parameters.cid += 1
       success: =>
         @calling = false
-        document.gignal.widget.refresh()
         # set latest
-        @parameters.sinceTime = _.max(@pluck('created_on'))
+        @parameters.sinceTime = _.max(@pluck('saved_on'))
         # reset cache id?
         if sinceTimeCall isnt @parameters.sinceTime
           @parameters.cid = 0
@@ -66,4 +69,4 @@ class Stream extends Backbone.Collection
   setIntervalUpdate: ->
     window.setInterval ->
       document.gignal.stream.update()
-    , 4500
+    , 4800
