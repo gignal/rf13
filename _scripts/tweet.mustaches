@@ -1,0 +1,14 @@
+<div class="gignal-text">
+  <span class="message">{{{message}}}</span>
+  <hr />
+</div>
+<div class="gignal-box-footer">
+  <div class="pull-left">
+    <a href="http://{{service}}.com/{{username}}"><img src="{{user_image}}" class="gignal-avatar" /></a>
+  </div>
+  {{name}}<br />
+  {{#username}}
+    <a href="http://{{service}}.com/{{username}}">@{{username}}</a>
+  {{/username}}
+  <a href="http://{{service}}.com/"><img src="images/{{service}}.png" class="gignal-service" /></a>
+</div>

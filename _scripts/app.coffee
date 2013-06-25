@@ -13,13 +13,13 @@ class Stream extends Backbone.Collection
   calling: false
   parameters:
     cid: 0
-    limit: 5
+    limit: 30
     sinceTime: 0
 
   initialize: ->
     @on 'add', @inset
     @update()
-    @setIntervalUpdate()
+    #@setIntervalUpdate()
 
   inset: (model) ->
     switch model.get 'type'
@@ -31,7 +31,7 @@ class Stream extends Backbone.Collection
           model: model
     document.gignal.widget.$el.prepend(view.render().el).isotope('reloadItems').isotope 
       sortBy: 'original-order'
-    document.gignal.widget.refresh()
+    #document.gignal.widget.refresh()
 
   parse: (response) ->
     return response.stream

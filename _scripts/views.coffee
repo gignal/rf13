@@ -22,75 +22,32 @@ class document.gignal.views.Event extends Backbone.View
       @$el.isotope @isotoptions
 
 
-class document.gignal.views.Text extends Backbone.View
-  tagName: 'p'
-  className: 'gignal-text'
-  re_links: /(\b(https?):\/\/[\-A-Z0-9+&@#\/%?=~_|!:,.;]*[\-A-Z0-9+&@#\/%=~_|])/g
-  render: =>
-    text = @model.get 'text'
-    text = text.replace(@re_links, '<a href="$1" target="_top">link</a>')
-    @$el.html text
-    return @
-
-
 class document.gignal.views.TextBox extends Backbone.View
-  tagName: 'blockquote'
+  tagName: 'div'
   className: 'gignal-outerbox'
-  initialize: ->
-    # create elements
-    @text = new document.gignal.views.Text(model: @model).render()
-    @footer = new document.gignal.views.Footer(model: @model).render()
+  re_links: /((http|https)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?)/g
   render: =>
-    @$el.data 'saved_on', @model.get('saved_on')
     @$el.css 'width', document.gignal.widget.columnWidth
-    @$el.html @text.$el
-    #@$el.append @footer.$el
+    text = @model.get 'text'
+    text = text.replace @re_links, '<a href="$1">link</a>'
+    username = @model.get 'username'
+    username = null if username.indexOf(' ') isnt -1
+    @$el.html Templates.tweet.render
+      message: text
+      username: username
+      name: @model.get 'name'
+      creation: @model.get 'creation'
+      original_id: @model.get 'original_id'
+      service: @model.get 'service'
+      user_image: @model.get 'user_image'
     return @
 
 
 class document.gignal.views.PhotoBox extends Backbone.View
-  tagName: 'blockquote'
+  tagName: 'div'
   className: 'gignal-outerbox gignal-imagebox'
-  initialize: ->
-    # create elements
-    @footer = new document.gignal.views.Footer(model: @model).render()
   render: =>
-    @$el.data 'saved_on', @model.get 'saved_on'
+    #@$el.data 'saved_on', @model.get 'saved_on'
     @$el.css 'width', document.gignal.widget.columnWidth
     @$el.css 'background-image', 'url(' + @model.get('thumb_photo') + ')'
-    @$el.append @footer.$el
-    return @
-
-
-class document.gignal.views.Footer extends Backbone.View
-
-  tagName: 'div'
-  className: 'gignal-box-footer'
-
-  initialize: ->
-    # @serviceImg = new Backbone.View(
-    #   tagName: 'img'
-    #   attributes:
-    #     src: 'images/' + @model.get('service') + '.png'
-    #     alt: 'Service'
-    # )
-    @avatar = new Backbone.View(
-      tagName: 'img'
-      className: 'gignal-avatar'
-      attributes:
-        src: @model.get 'user_image'
-        alt: 'Avatar'
-    )
-    @serviceProfileLink = new Backbone.View(
-      tagName: 'a'
-      attributes:
-        href: 'http://' + @model.get('service') + '.com/' + @model.get('username')
-    )
-
-  render: =>
-    $(@serviceProfileLink.$el).append @avatar.$el
-    $(@serviceProfileLink.$el).append @model.get('name')
-    # @$el.html @serviceImg.$el
-    # @$el.append @serviceProfileLink.$el
-    @$el.html @serviceProfileLink.$el
     return @

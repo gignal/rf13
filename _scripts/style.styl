@@ -1,15 +1,29 @@
 background_color = #e95814
-action_link_color = #696969
+action_link_color = #F09368
+box_shadow = 0 8px 6px -6px black
 
 @import 'isotope'
 
+.pull-left
+  float: left
+.pull-right 
+  float: right
+  
+.hide
+  display: none
+
 #gignal-widget
   background-color: background_color
+  font-family: Georgia, Arial, sans-serif;
 
   .gignal-outerbox
     display: inline-block
     background-color: #fff
     margin: 5px
+    margin-bottom: 9px
+    -webkit-box-shadow: box_shadow
+    -moz-box-shadow: box_shadow
+    box-shadow: box_shadow
 
     a
       color: action_link_color
@@ -19,29 +33,49 @@ action_link_color = #696969
       border: none
 
     .gignal-text
-      margin: 0
-      border-bottom: 2px solid background_color
+      position: relative
       padding: 10px
       word-wrap: break-word
       max-height: 200px
       overflow: hidden
       color: background_color
+      text-align: center
+      
+      .message
+        font-family: '4000italic', Georgia, Arial, sans-serif;
+    
+      hr
+        border: 0
+        height: 1px
+        background: background_color
+        margin-bottom: 0
     
     .gignal-box-footer
-      height: 18px
-      display: inline-block
+      position: relative
+      //width: 100%
+      height: 48px
+      //display: inline-block
       padding: 10px
+      padding-top: 0
       line-height: 18px
       font-size: 13px
       font-weight: normal
-      color: action_link_color
+      color: background_color
     
       img
         margin-right: 5px
     
       .gignal-avatar
-        max-width: 18px
-        max-height: 18px
+        max-width: 48px
+        max-height: 48px
+
+      .gignal-service
+        width: 18px
+        height: 18px
+        margin-right: 0
+        position: absolute
+        right: 0
+        bottom: 0
 
   .gignal-imagebox
     height: 185px
@@ -51,17 +85,24 @@ action_link_color = #696969
       margin-top: 145px
 
 
-  #gignal-footer
-    position: fixed
-    left: 0px
-    bottom: 0px
-    width: 100%
-    height: 88px
-    background-color: #000
+#gignal-footer
+  position: fixed
+  left: 0px
+  bottom: 0px
+  width: 100%
+  z-index: 999
+  
+  .flap
+    position: relative
+    background-color: background_color
+    opacity: 0.75
+    width: 168px
+    height: 66px
+    margin: 0 auto
 
     img
       position: relative
-      top: 23px
+      top: 10px
       height: 46px
       display: block
       margin: 0 auto

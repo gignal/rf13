@@ -15,6 +15,16 @@ module.exports = (grunt) ->
             '_scripts/init.coffee'
           ]
 
+    hogan:
+      app:
+        options:
+          defaultName: (filename) ->
+            filename.split('/').pop().split('.').shift()
+        files: 
+          'lib/templates.js': [
+            '_scripts/*.mustaches'
+          ]
+
     uglify:
       options:
         sourceMapRoot: 'lib'
@@ -28,6 +38,8 @@ module.exports = (grunt) ->
             'components/underscore/underscore.js'
             'components/backbone/backbone.js'
             'components/isotope/jquery.isotope.js'
+            'components/hogan/web/builds/2.0.0/template-2.0.0.js'
+            'lib/templates.js'
             'lib/app.js'
           ]
 
@@ -45,18 +57,19 @@ module.exports = (grunt) ->
         files: ['_scripts/*.styl']
         tasks: ['stylus']
       coffee:
-        files: ['_scripts/*.coffee']
-        tasks: ['coffee', 'uglify']
+        files: ['_scripts/*.coffee', '_scripts/*.mustaches']
+        tasks: ['coffee', 'hogan', 'uglify']
 
     connect:
       app:
         options:
           keepalive: true
 
-  grunt.registerTask 'default', ['coffee', 'uglify', 'stylus']
+  grunt.registerTask 'default', ['coffee', 'hogan', 'uglify', 'stylus']
 
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-connect'
   grunt.loadNpmTasks 'grunt-contrib-stylus'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
+  grunt.loadNpmTasks 'grunt-contrib-hogan'
