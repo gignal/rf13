@@ -44,11 +44,11 @@ box_shadow = 0 8px 6px -6px black
       .message
         font-family: '4000italic', Georgia, Arial, sans-serif;
     
-      hr
-        border: 0
-        height: 1px
-        background: background_color
-        margin-bottom: 0
+    hr
+      border: 0
+      height: 1px
+      background: background_color
+      margin-bottom: 0
     
     .gignal-box-footer
       position: relative
@@ -76,26 +76,36 @@ box_shadow = 0 8px 6px -6px black
         position: absolute
         right: 0
         bottom: 0
+        opacity: 0.5
 
   .gignal-imagebox
-    height: 185px
-    background-size: cover
+    position: relative
+    padding: 10px
+    //padding-bottom: 0
+    word-wrap: break-word
+    overflow: hidden
+    color: background_color
+    text-align: center
+    
+    .gignal-image
+      height: 185px
+      background-size: cover
   
-    .gignal-box-footer
-      margin-top: 145px
+    // .gignal-box-footer
+    //   margin-top: 145px
 
 
 #gignal-footer
-  position: fixed
-  left: 0px
-  bottom: 0px
+  // position: fixed
+  // left: 0px
+  // bottom: 0px
   width: 100%
   z-index: 999
   
   .flap
     position: relative
     background-color: background_color
-    opacity: 0.75
+    //opacity: 0.75
     width: 168px
     height: 66px
     margin: 0 auto

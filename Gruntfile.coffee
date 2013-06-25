@@ -22,7 +22,7 @@ module.exports = (grunt) ->
             filename.split('/').pop().split('.').shift()
         files: 
           'lib/templates.js': [
-            '_scripts/*.mustaches'
+            '_scripts/*.mustache'
           ]
 
     uglify:
@@ -57,7 +57,7 @@ module.exports = (grunt) ->
         files: ['_scripts/*.styl']
         tasks: ['stylus']
       coffee:
-        files: ['_scripts/*.coffee', '_scripts/*.mustaches']
+        files: ['_scripts/*.coffee', '_scripts/*.mustache']
         tasks: ['coffee', 'hogan', 'uglify']
 
     connect:

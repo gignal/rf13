@@ -32,7 +32,7 @@ class document.gignal.views.TextBox extends Backbone.View
     text = text.replace @re_links, '<a href="$1">link</a>'
     username = @model.get 'username'
     username = null if username.indexOf(' ') isnt -1
-    @$el.html Templates.tweet.render
+    @$el.html Templates.post.render
       message: text
       username: username
       name: @model.get 'name'
@@ -45,9 +45,23 @@ class document.gignal.views.TextBox extends Backbone.View
 
 class document.gignal.views.PhotoBox extends Backbone.View
   tagName: 'div'
-  className: 'gignal-outerbox gignal-imagebox'
+  className: 'gignal-outerbox'
   render: =>
     #@$el.data 'saved_on', @model.get 'saved_on'
     @$el.css 'width', document.gignal.widget.columnWidth
-    @$el.css 'background-image', 'url(' + @model.get('thumb_photo') + ')'
+    #@$el.css 'background-image', 'url(' + @model.get('thumb_photo') + ')'
+    text = @model.get 'text'
+    text = text.replace @re_links, '<a href="$1">link</a>'
+    text = null if text.indexOf(' ') is -1
+    username = @model.get 'username'
+    username = null if username.indexOf(' ') isnt -1
+    @$el.html Templates.photo.render
+      message: text
+      username: username
+      name: @model.get 'name'
+      creation: @model.get 'creation'
+      original_id: @model.get 'original_id'
+      service: @model.get 'service'
+      user_image: @model.get 'user_image'
+      thumb_photo: @model.get 'thumb_photo'
     return @
