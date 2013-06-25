@@ -25,21 +25,12 @@ class document.gignal.views.Event extends Backbone.View
 class document.gignal.views.TextBox extends Backbone.View
   tagName: 'div'
   className: 'gignal-outerbox'
-  re_links: /((http|https)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?)/g
   render: =>
     @$el.css 'width', document.gignal.widget.columnWidth
-    text = @model.get 'text'
-    text = text.replace @re_links, '<a href="$1">link</a>'
-    username = @model.get 'username'
-    username = null if username.indexOf(' ') isnt -1
-    @$el.html Templates.post.render
-      message: text
-      username: username
-      name: @model.get 'name'
-      creation: @model.get 'creation'
-      original_id: @model.get 'original_id'
-      service: @model.get 'service'
-      user_image: @model.get 'user_image'
+    if @model.get 'admin_entry'
+      @$el.addClass 'gignal-owner'
+    @$el.html Templates.post.render @model.getData(),
+      footer: Templates.footer
     return @
 
 
@@ -47,21 +38,7 @@ class document.gignal.views.PhotoBox extends Backbone.View
   tagName: 'div'
   className: 'gignal-outerbox'
   render: =>
-    #@$el.data 'saved_on', @model.get 'saved_on'
     @$el.css 'width', document.gignal.widget.columnWidth
-    #@$el.css 'background-image', 'url(' + @model.get('thumb_photo') + ')'
-    text = @model.get 'text'
-    text = text.replace @re_links, '<a href="$1">link</a>'
-    text = null if text.indexOf(' ') is -1
-    username = @model.get 'username'
-    username = null if username.indexOf(' ') isnt -1
-    @$el.html Templates.photo.render
-      message: text
-      username: username
-      name: @model.get 'name'
-      creation: @model.get 'creation'
-      original_id: @model.get 'original_id'
-      service: @model.get 'service'
-      user_image: @model.get 'user_image'
-      thumb_photo: @model.get 'thumb_photo'
+    @$el.html Templates.photo.render @model.getData(),
+      footer: Templates.footer
     return @

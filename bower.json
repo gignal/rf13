@@ -5,6 +5,7 @@
     "isotope": "~1.5.25",
     "backbone": "~1.0.0",
     "underscore": "~1.4.4",
-    "hogan": "latest"
+    "hogan": "latest",
+    "humane-dates": "latest"
   }
 }

@@ -3,7 +3,35 @@ document.gignal =
 
 
 class Post extends Backbone.Model
+
   idAttribute: 'stream_id'
+  re_links: /((http|https)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?)/g
+
+  getData: =>
+    text = @get 'text'
+    text = text.replace @re_links, '<a href="$1">link</a>'
+    text = null if text.indexOf(' ') is -1
+    username = @get 'username'
+    username = null if username.indexOf(' ') isnt -1
+    switch @get 'service'
+      when 'Twitter'
+        direct = 'http://twitter.com/' + username + '/status/' + @get 'original_id'
+      when 'Facebook'
+        direct = 'http://facebook.com/' + @get 'original_id'
+      when 'Instagram'
+        direct = 'http://instagram.com/p/' + @get 'original_id'
+      else
+        direct = '#'
+    data =
+      message: text
+      username: username
+      name: @get 'name'
+      since: humaneDate @get 'creation'
+      service: @get 'service'
+      user_image: @get 'user_image'
+      thumb_photo: @get 'thumb_photo'
+      direct: direct
+    return data
 
 
 class Stream extends Backbone.Collection
@@ -21,7 +49,7 @@ class Stream extends Backbone.Collection
     @update()
     #@setIntervalUpdate()
 
-  inset: (model) ->
+  inset: (model) =>
     switch model.get 'type'
       when 'text'
         view = new document.gignal.views.TextBox
@@ -32,7 +60,7 @@ class Stream extends Backbone.Collection
     document.gignal.widget.$el.prepend(view.render().el).isotope('reloadItems').isotope 
       sortBy: 'original-order'
     #document.gignal.widget.refresh()
-
+    
   parse: (response) ->
     return response.stream
     
