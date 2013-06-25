@@ -5,7 +5,7 @@ module.exports = (grunt) ->
     coffee:
       compileWithMaps:
         options:
-          sourceMap: true
+          #sourceMap: true
           join: true
           bare: true
         files:
@@ -27,9 +27,9 @@ module.exports = (grunt) ->
 
     uglify:
       options:
-        sourceMapRoot: 'lib'
-        sourceMapIn: 'lib/app.js.map'
-        sourceMap: './lib/app.min.js.map'
+        # sourceMapRoot: 'lib'
+        # sourceMapIn: 'lib/app.js.map'
+        # sourceMap: './lib/app.min.js.map'
         mangle: false
         #wrap: 'gignal'
       app:
