@@ -39,6 +39,7 @@ module.exports = (grunt) ->
             'components/backbone/backbone.js'
             'components/isotope/jquery.isotope.js'
             'components/humane-dates/humane.js'
+            'components/scrollbottom/src/jquery.scrollbottom.js'
             'components/hogan/web/builds/2.0.0/template-2.0.0.js'
             'lib/templates.js'
             'lib/app.js'

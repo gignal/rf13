@@ -6,3 +6,7 @@ jQuery ($) ->
 
   document.gignal.stream = new Stream [],
     url: 'http://dev.gignal.com/event/api/uuid/' + $('#gignal-widget').data('eventid') + '?callback=?'
+
+
+  $(window).on 'scrollBottom', offsetY: -100, ->
+    document.gignal.stream.update true

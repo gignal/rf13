@@ -29,7 +29,7 @@ class Post extends Backbone.Model
       since: humaneDate @get 'creation'
       service: @get 'service'
       user_image: @get 'user_image'
-      thumb_photo: @get 'thumb_photo'
+      photo: @get 'large_photo'
       direct: direct
     return data
 
@@ -41,13 +41,14 @@ class Stream extends Backbone.Collection
   calling: false
   parameters:
     cid: 0
-    limit: 30
+    limit: 25
+    limitMore: 25
     sinceTime: 0
 
   initialize: ->
     @on 'add', @inset
     @update()
-    #@setIntervalUpdate()
+    @setIntervalUpdate()
 
   inset: (model) =>
     switch model.get 'type'
@@ -57,7 +58,8 @@ class Stream extends Backbone.Collection
       when 'photo'
         view = new document.gignal.views.PhotoBox
           model: model
-    document.gignal.widget.$el.prepend(view.render().el).isotope('reloadItems').isotope 
+    method = if not @append then 'prepend' else 'append'
+    document.gignal.widget.$el[method](view.render().el).isotope('reloadItems').isotope 
       sortBy: 'original-order'
     #document.gignal.widget.refresh()
     
@@ -67,31 +69,36 @@ class Stream extends Backbone.Collection
   comparator: (item) ->
     return - item.get 'saved_on'
 
-  update: =>
+  update: (@append) =>
     return if @calling
     @calling = true
-    sinceTimeCall = @parameters.sinceTime
+    if not @append
+      sinceTime = _.max(@pluck('saved_on'))
+      limit = @parameters.limit
+    else
+      sinceTime = _.min(@pluck('saved_on'))
+      @parameters.limitMore += @parameters.limit
+      limit = @parameters.limitMore
+    sinceTimeCall = _.max(@pluck('saved_on'))
     @fetch
       remove: false
       cache: true
       timeout: 15000
       jsonpCallback: 'callme'
       data:
-        limit: @parameters.limit
-        sinceTime: @parameters.sinceTime
+        limit: limit
+        sinceTime: sinceTime if sinceTime > 0
         cid: @parameters.cid += 1
       success: =>
         @calling = false
-        # set latest
-        @parameters.sinceTime = _.max(@pluck('saved_on'))
         # reset cache id?
-        if sinceTimeCall isnt @parameters.sinceTime
+        if sinceTimeCall isnt _.max(@pluck('saved_on'))
           @parameters.cid = 0
       error: (c, response) =>
         if response.statusText is 'timeout'
           @calling = false
         else
-          #location.reload true
+          location.reload true
 
 
   setIntervalUpdate: ->
