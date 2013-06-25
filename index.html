@@ -1,20 +1,49 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>Gignal widget example</title>
+  <title>Gignal widget for #rf13</title>
+  <link rel="stylesheet" href="./lib/webfontkit-20130620-070023/stylesheet.css" />
   <style>
   body {
-    margin: 0;
+    background-color: #e95814;
+  }
+  header {
+    font-family: '4000heavy_left';
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 3px;
+  }
+  .sm img {
+    width: 47px;
+    height: 47px;
+    margin-left: 5px;
   }
   </style>
+  <link rel="stylesheet" href="./lib/style.min.css" />
+  <script>!window.jQuery && document.write('<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"><\/script>')</script>
+  <script src="./lib/app.min.js" async></script>
 </head>
 <body>
 
 
-  <script>!window.jQuery && document.write('<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"><\/script>')</script>
-  <link rel="stylesheet" href="./lib/style.min.css" />
+  <header>
+    <div class="pull-right sm">
+      <a href="https://twitter.com/search?q=%23rf13"><img src="./images/Twitter-white.png" alt="Twitter" /></a>
+      <a href="https://www.facebook.com/hashtag/rf13"><img src="./images/Facebook-white.png" alt="Facebook" /></a>
+      <a href="http://www.flickr.com/search/?q=rf13&m=tags&ct=0&mt=photos&adv=1"><img src="./images/Flickr-white.png" alt="Flickr" /></a>
+    </div>
+    <h1>Join the conversation &mdash; #rf13</h1>
+  </header>
+
+
   <div id="gignal-widget" data-eventid="51b64b0e61c0f"></div>
-  <script src="./lib/app.min.js" async></script>
+
+
+  <footer id="gignal-footer" class="hide">
+    <div class="flap">
+      <a href="http://www.gignal.com/"><img src="./images/Gignal-light.png" alt="Powered by Gignal" /></a>
+    </div>
+  </footer>
 
 
 </body>
