@@ -62,6 +62,8 @@ class Stream extends Backbone.Collection
     document.gignal.widget.$el[method](view.render().el).isotope('reloadItems').isotope 
       sortBy: 'original-order'
     #document.gignal.widget.refresh()
+    $('a[href^="http"]').attr 'target', '_blank'
+    
     
   parse: (response) ->
     return response.stream

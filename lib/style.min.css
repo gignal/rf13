@@ -11,9 +11,11 @@ header{font-family:'4000heavy_left';text-transform:uppercase;color:#fff;margin:0
 @font-face{font-family:'4000italic';src:url("font/4000-italic-webfont.eot");src:url("font/4000-italic-webfont.eot?#iefix") format('embedded-opentype'),url("font/4000-italic-webfont.woff") format('woff'),url("font/4000-italic-webfont.ttf") format('truetype'),url("font/4000-italic-webfont.svg#4000italic") format('svg');font-weight:normal;font-style:normal}
 .pull-left{float:left}
 .pull-right{float:right}
+.lcase{text-transform:lowercase}
 #gignal-widget{background-color:#e95814;font-family:Georgia,Arial,sans-serif;}
 #gignal-widget .gignal-outerbox{display:inline-block;background-color:#fff;margin:5px;margin-bottom:9px;-webkit-box-shadow:0 8px 6px -6px #000;-moz-box-shadow:0 8px 6px -6px #000;box-shadow:0 8px 6px -6px #000;}
-#gignal-widget .gignal-outerbox a{color:#f09368;text-decoration:none}
+#gignal-widget .gignal-outerbox a{color:#f09368;text-decoration:none;}
+#gignal-widget .gignal-outerbox a:hover{text-decoration:underline}
 #gignal-widget .gignal-outerbox img{border:none}
 #gignal-widget .gignal-outerbox .gignal-text{position:relative;padding:10px;word-wrap:break-word;max-height:200px;overflow:hidden;color:#e95814;text-align:center;}
 #gignal-widget .gignal-outerbox .gignal-text .message{font-family:'4000italic',Georgia,Arial,sans-serif}
