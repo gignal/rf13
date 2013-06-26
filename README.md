@@ -4,6 +4,6 @@
 
 You need NPM, Grunt and Bower.
 
-  npm install
-  bower install
-  grunt
+    npm install
+    bower install
+    grunt
