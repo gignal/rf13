@@ -1,0 +1,37 @@
+body{background-color:#e95814}
+header{font-family:'4000heavy_left';text-transform:uppercase;color:#fff;margin:0 3px}
+.sm img{width:47px;height:47px;margin-left:5px}
+.isotope-item{z-index:2}
+.isotope-hidden.isotope-item{pointer-events:none;z-index:1}
+.isotope,.isotope .isotope-item{-webkit-transition-duration:.8s;-moz-transition-duration:.8s;-ms-transition-duration:.8s;-o-transition-duration:.8s;transition-duration:.8s}
+.isotope{-webkit-transition-property:height,width;-moz-transition-property:height,width;-ms-transition-property:height,width;-o-transition-property:height,width;transition-property:height,width}
+.isotope .isotope-item{-webkit-transition-property:-webkit-transform,opacity;-moz-transition-property:-moz-transform,opacity;-ms-transition-property:-ms-transform,opacity;-o-transition-property:-o-transform,opacity;transition-property:transform,opacity}
+.isotope.no-transition,.isotope.no-transition .isotope-item,.isotope .isotope-item.no-transition{-webkit-transition-duration:0;-moz-transition-duration:0;-ms-transition-duration:0;-o-transition-duration:0;transition-duration:0}
+@font-face{font-family:'4000heavy_left';src:url("font/4000-heavy_left-webfont.eot");src:url("font/4000-heavy_left-webfont.eot?#iefix") format('embedded-opentype'),url("font/4000-heavy_left-webfont.woff") format('woff'),url("font/4000-heavy_left-webfont.ttf") format('truetype'),url("font/4000-heavy_left-webfont.svg#4000heavy_left") format('svg');font-weight:normal;font-style:normal}
+@font-face{font-family:'4000italic';src:url("font/4000-italic-webfont.eot");src:url("font/4000-italic-webfont.eot?#iefix") format('embedded-opentype'),url("font/4000-italic-webfont.woff") format('woff'),url("font/4000-italic-webfont.ttf") format('truetype'),url("font/4000-italic-webfont.svg#4000italic") format('svg');font-weight:normal;font-style:normal}
+.pull-left{float:left}
+.pull-right{float:right}
+.lcase{text-transform:lowercase}
+#gignal-widget{background-color:#e95814;font-family:Georgia,Arial,sans-serif;}
+#gignal-widget .gignal-outerbox{display:inline-block;background-color:#fff;margin:5px;margin-bottom:9px;-webkit-box-shadow:0 8px 6px -6px #000;-moz-box-shadow:0 8px 6px -6px #000;box-shadow:0 8px 6px -6px #000;}
+#gignal-widget .gignal-outerbox a{color:#f09368;text-decoration:none;}
+#gignal-widget .gignal-outerbox a:hover{text-decoration:underline}
+#gignal-widget .gignal-outerbox img{border:none}
+#gignal-widget .gignal-outerbox .gignal-text{position:relative;padding:10px;word-wrap:break-word;max-height:200px;overflow:hidden;color:#e95814;text-align:center;}
+#gignal-widget .gignal-outerbox .gignal-text .message{font-family:'4000italic',Georgia,Arial,sans-serif}
+#gignal-widget .gignal-outerbox hr{border:0;height:1px;background:#e95814;margin-bottom:0}
+#gignal-widget .gignal-outerbox .gignal-box-footer{position:relative;height:48px;word-wrap:break-word;overflow:hidden;padding:10px;padding-top:0;line-height:16px;font-size:12px;font-weight:normal;color:#e95814;}
+#gignal-widget .gignal-outerbox .gignal-box-footer img{margin-right:5px}
+#gignal-widget .gignal-outerbox .gignal-box-footer .gignal-avatar{max-width:48px;max-height:48px}
+#gignal-widget .gignal-outerbox .gignal-box-footer .gignal-service{width:18px;height:18px;margin-right:0;position:absolute;right:0;bottom:0;opacity:.5}
+#gignal-widget .gignal-owner{background-color:#e95814;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;}
+#gignal-widget .gignal-owner .gignal-text{color:#fff}
+#gignal-widget .gignal-owner a{color:#eee}
+#gignal-widget .gignal-owner hr{background:#fff}
+#gignal-widget .gignal-owner .gignal-box-footer{color:#fff}
+#gignal-widget .gignal-owner .gignal-service{display:none}
+#gignal-widget .gignal-imagebox{position:relative;padding:10px;word-wrap:break-word;overflow:hidden;color:#e95814;text-align:center;}
+#gignal-widget .gignal-imagebox .gignal-image{height:185px;background-size:cover}
+#gignal-footer{width:100%;z-index:999;}
+#gignal-footer .flap{position:relative;background-color:#e95814;width:168px;height:66px;margin:0 auto;}
+#gignal-footer .flap img{position:relative;top:10px;height:46px;display:block;margin:0 auto;border:none}
