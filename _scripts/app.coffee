@@ -52,7 +52,7 @@ class Stream extends Backbone.Collection
   initialize: ->
     @on 'add', @inset
     @update()
-    #@setIntervalUpdate()
+    @setIntervalUpdate()
 
   inset: (model) =>
     switch model.get 'type'
