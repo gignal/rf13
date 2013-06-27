@@ -19,7 +19,11 @@ class Post extends Backbone.Model
       when 'Facebook'
         direct = 'http://facebook.com/' + @get 'original_id'
       when 'Instagram'
-        direct = 'http://instagram.com/p/' + @get 'original_id'
+        direct = @get 'direct_url'
+        if not direct
+          $.getJSON('https://api.instagram.com/v1/media/' + @get('original_id') + '?client_id=3ebcc844a6df41169c1955e0f75d6fce&callback=?')
+          .done (response) =>
+            @set 'direct_url', response.data.link
       else
         direct = '#'
     data =
@@ -48,7 +52,7 @@ class Stream extends Backbone.Collection
   initialize: ->
     @on 'add', @inset
     @update()
-    @setIntervalUpdate()
+    #@setIntervalUpdate()
 
   inset: (model) =>
     switch model.get 'type'
