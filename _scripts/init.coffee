@@ -1,5 +1,8 @@
 jQuery ($) ->
-
+  
+  $.ajaxSetup
+    cache: true
+    
   Backbone.$ = $
 
   document.gignal.widget = new document.gignal.views.Event()

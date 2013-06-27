@@ -6,7 +6,7 @@ class document.gignal.views.Event extends Backbone.View
     itemSelector: '.gignal-outerbox'
     layoutMode: 'masonry'
     sortAscending: true
-
+    
   initialize: ->
     # set Isotope masonry columnWidth
     radix = 10
@@ -25,13 +25,16 @@ class document.gignal.views.Event extends Backbone.View
 class document.gignal.views.TextBox extends Backbone.View
   tagName: 'div'
   className: 'gignal-outerbox'
-  initialize: ->
-    @listenTo @model, 'change', @render
+  # initialize: ->
+  #   @listenTo @model, 'change', @render
   render: =>
     @$el.css 'width', document.gignal.widget.columnWidth
     if @model.get 'admin_entry'
       @$el.addClass 'gignal-owner'
-    @$el.html Templates.post.render @model.getData(),
+    data = @model.getData()
+    if not data.message
+      document.gignal.widget.$el.isotope 'remove', @$el
+    @$el.html Templates.post.render data,
       footer: Templates.footer
     return @
 
@@ -42,9 +45,18 @@ class document.gignal.views.PhotoBox extends Backbone.View
   initialize: ->
     @listenTo @model, 'change', @render
   render: =>
+    # set width
     @$el.css 'width', document.gignal.widget.columnWidth
+    # owner?
     if @model.get 'admin_entry'
       @$el.addClass 'gignal-owner'
+    # get data
+    data = @model.getData()
+    # img exist?
+    if not data.photo
+      document.gignal.widget.$el.isotope 'remove', @$el
+      return
+    # render
     @$el.html Templates.photo.render @model.getData(),
       footer: Templates.footer
     return @

@@ -21,9 +21,11 @@ class Post extends Backbone.Model
       when 'Instagram'
         direct = @get 'direct_url'
         if not direct
+          @set 'direct_url', '#'
           $.getJSON('https://api.instagram.com/v1/media/' + @get('original_id') + '?client_id=3ebcc844a6df41169c1955e0f75d6fce&callback=?')
           .done (response) =>
-            @set 'direct_url', response.data.link
+            if response.data?
+              @set 'direct_url', response.data.link
       else
         direct = '#'
     data =
@@ -46,7 +48,7 @@ class Stream extends Backbone.Collection
   parameters:
     cid: 0
     limit: 25
-    limitMore: 25
+    offset: 0
     sinceTime: 0
 
   initialize: ->
@@ -65,7 +67,7 @@ class Stream extends Backbone.Collection
     method = if not @append then 'prepend' else 'append'
     document.gignal.widget.$el[method](view.render().el).isotope('reloadItems').isotope 
       sortBy: 'original-order'
-    #document.gignal.widget.refresh()
+    document.gignal.widget.refresh()
     $('a[href^="http"]').attr 'target', '_blank'
     
     
@@ -80,11 +82,13 @@ class Stream extends Backbone.Collection
     @calling = true
     if not @append
       sinceTime = _.max(@pluck('saved_on'))
-      limit = @parameters.limit
+      # hack until issue #49 is fixed
+      if not _.isFinite sinceTime
+        sinceTime = Math.round(+new Date() / 1000) - (5 * 60 * 60)
+      offset = 0
     else
       sinceTime = _.min(@pluck('saved_on'))
-      @parameters.limitMore += @parameters.limit
-      limit = @parameters.limitMore
+      offset = @parameters.offset += @parameters.limit
     sinceTimeCall = _.max(@pluck('saved_on'))
     @fetch
       remove: false
@@ -92,8 +96,9 @@ class Stream extends Backbone.Collection
       timeout: 15000
       jsonpCallback: 'callme'
       data:
-        limit: limit
-        sinceTime: sinceTime if sinceTime > 0
+        limit: @parameters.limit
+        offset: offset
+        sinceTime: sinceTime if _.isFinite sinceTime
         cid: @parameters.cid += 1
       success: =>
         @calling = false
