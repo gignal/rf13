@@ -20,7 +20,7 @@ header{font-family:'4000heavy_left';text-transform:uppercase;color:#fff;margin:0
 #gignal-widget .gignal-outerbox .gignal-text{position:relative;padding:10px;word-wrap:break-word;max-height:200px;overflow:hidden;color:#e95814;text-align:center;}
 #gignal-widget .gignal-outerbox .gignal-text .message{font-family:'4000italic',Georgia,Arial,sans-serif}
 #gignal-widget .gignal-outerbox hr{border:0;height:1px;background:#e95814;margin-bottom:0}
-#gignal-widget .gignal-outerbox .gignal-box-footer{position:relative;height:48px;padding:10px;padding-top:0;line-height:16px;font-size:12px;font-weight:normal;color:#e95814;}
+#gignal-widget .gignal-outerbox .gignal-box-footer{position:relative;height:48px;word-wrap:break-word;overflow:hidden;padding:10px;padding-top:0;line-height:16px;font-size:12px;font-weight:normal;color:#e95814;}
 #gignal-widget .gignal-outerbox .gignal-box-footer img{margin-right:5px}
 #gignal-widget .gignal-outerbox .gignal-box-footer .gignal-avatar{max-width:48px;max-height:48px}
 #gignal-widget .gignal-outerbox .gignal-box-footer .gignal-service{width:18px;height:18px;margin-right:0;position:absolute;right:0;bottom:0;opacity:.5}

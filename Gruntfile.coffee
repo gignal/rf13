@@ -9,7 +9,7 @@ module.exports = (grunt) ->
           join: true
           bare: true
         files:
-          'lib/app.js': [
+          'gignal/lib/app.js': [
             '_scripts/app.coffee'
             '_scripts/views.coffee'
             '_scripts/init.coffee'
@@ -21,36 +21,36 @@ module.exports = (grunt) ->
           defaultName: (filename) ->
             filename.split('/').pop().split('.').shift()
         files: 
-          'lib/templates.js': [
+          'gignal/lib/templates.js': [
             '_scripts/*.mustache'
           ]
 
     uglify:
       options:
-        # sourceMapRoot: 'lib'
-        # sourceMapIn: 'lib/app.js.map'
-        # sourceMap: './lib/app.min.js.map'
+        # sourceMapRoot: 'gignal/lib'
+        # sourceMapIn: 'gignal/lib/app.js.map'
+        # sourceMap: './gignal/lib/app.min.js.map'
         mangle: false
         #wrap: 'gignal'
       app:
         files: 
-          'lib/app.min.js': [
+          'gignal/lib/app.min.js': [
             'components/underscore/underscore.js'
             'components/backbone/backbone.js'
             'components/isotope/jquery.isotope.js'
             'components/humane-dates/humane.js'
             'components/scrollbottom/src/jquery.scrollbottom.js'
             'components/hogan/web/builds/2.0.0/template-2.0.0.js'
-            'lib/templates.js'
-            'lib/app.js'
+            'gignal/lib/templates.js'
+            'gignal/lib/app.js'
           ]
 
     stylus:
       compile:
         options:
-          paths: ['lib']
+          paths: ['gignal/lib']
         files: 
-          'lib/style.min.css': [
+          'gignal/lib/style.min.css': [
             '_scripts/style.styl'
           ]
 

@@ -44,6 +44,7 @@ Post = (function(_super) {
         if (!direct) {
           this.set('direct_url', '#');
           $.getJSON('https://api.instagram.com/v1/media/' + this.get('original_id') + '?client_id=3ebcc844a6df41169c1955e0f75d6fce&callback=?').done(function(response) {
+            console.log(response);
             if (response.data != null) {
               return _this.set('direct_url', response.data.link);
             }
@@ -137,7 +138,7 @@ Stream = (function(_super) {
     if (!this.append) {
       sinceTime = _.max(this.pluck('saved_on'));
       if (!_.isFinite(sinceTime)) {
-        sinceTime = Math.round(+new Date() / 1000) - (5 * 60 * 60);
+        sinceTime = Math.round(+new Date() / 1000) - (2 * 60 * 60);
       }
       offset = 0;
     } else {
@@ -153,14 +154,10 @@ Stream = (function(_super) {
       data: {
         limit: this.parameters.limit,
         offset: offset,
-        sinceTime: _.isFinite(sinceTime) ? sinceTime : void 0,
-        cid: this.parameters.cid += 1
+        sinceTime: _.isFinite(sinceTime) ? sinceTime : void 0
       },
       success: function() {
-        _this.calling = false;
-        if (sinceTimeCall !== _.max(_this.pluck('saved_on'))) {
-          return _this.parameters.cid = 0;
-        }
+        return _this.calling = false;
       },
       error: function(c, response) {
         if (response.statusText === 'timeout') {
@@ -234,6 +231,10 @@ document.gignal.views.TextBox = (function(_super) {
   TextBox.prototype.tagName = 'div';
 
   TextBox.prototype.className = 'gignal-outerbox';
+
+  TextBox.prototype.initialize = function() {
+    return this.listenTo(this.model, 'change', this.render);
+  };
 
   TextBox.prototype.render = function() {
     var data;

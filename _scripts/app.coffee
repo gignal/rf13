@@ -84,7 +84,7 @@ class Stream extends Backbone.Collection
       sinceTime = _.max(@pluck('saved_on'))
       # hack until issue #49 is fixed
       if not _.isFinite sinceTime
-        sinceTime = Math.round(+new Date() / 1000) - (5 * 60 * 60)
+        sinceTime = Math.round(+new Date() / 1000) - (2 * 60 * 60)
       offset = 0
     else
       sinceTime = _.min(@pluck('saved_on'))
@@ -99,12 +99,12 @@ class Stream extends Backbone.Collection
         limit: @parameters.limit
         offset: offset
         sinceTime: sinceTime if _.isFinite sinceTime
-        cid: @parameters.cid += 1
+        #cid: @parameters.cid += 1
       success: =>
         @calling = false
         # reset cache id?
-        if sinceTimeCall isnt _.max(@pluck('saved_on'))
-          @parameters.cid = 0
+        # if sinceTimeCall isnt _.max(@pluck('saved_on'))
+        #   @parameters.cid = 0
       error: (c, response) =>
         if response.statusText is 'timeout'
           @calling = false
