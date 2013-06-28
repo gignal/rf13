@@ -135,7 +135,7 @@ Stream = (function(_super) {
   };
 
   Stream.prototype.update = function(append) {
-    var offset, sinceTime,
+    var offset, past, sinceTime,
       _this = this;
     this.append = append;
     if (this.calling) {
@@ -148,7 +148,9 @@ Stream = (function(_super) {
     if (!this.append) {
       sinceTime = _.max(this.pluck('saved_on'));
       if (!_.isFinite(sinceTime)) {
-        sinceTime = Math.round(+new Date() / 1000) - (2 * 60 * 60);
+        past = 60 * 60 * 1000;
+        sinceTime = (past * (Math.floor(+new Date() / past))) - past;
+        sinceTime = Math.ceil(sinceTime / 1000);
       }
       offset = 0;
     } else {
@@ -162,7 +164,7 @@ Stream = (function(_super) {
       jsonpCallback: 'callme',
       data: {
         limit: this.parameters.limit,
-        offset: offset,
+        offset: offset ? offset : void 0,
         sinceTime: _.isFinite(sinceTime) ? sinceTime : void 0
       },
       success: function() {
