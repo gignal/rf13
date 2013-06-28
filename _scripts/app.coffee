@@ -124,7 +124,7 @@ class Stream extends Backbone.Collection
 
   setIntervalUpdate: ->
     sleep = 5000
-    # ceil by 5sec then add 5sec
+    # floor by 5sec then add 5sec
     start = (sleep * (Math.floor(+new Date() / sleep))) + sleep
     window.setTimeout ->
       sleep = 5000
