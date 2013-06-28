@@ -1,5 +1,6 @@
 #gignal-stream{background-color:#e95814;}
-#gignal-stream header{font-family:'4000heavy_left';text-transform:uppercase;color:#fff;margin:0 3px}
+#gignal-stream header{background-color:#e95814;font-family:'4000heavy_left';text-transform:uppercase;color:#fff;margin:0 3px;padding:0 3px}
+#gignal-stream .sm{padding-top:5px;}
 #gignal-stream .sm img{width:47px;height:47px;margin-left:5px}
 .isotope-item{z-index:2}
 .isotope-hidden.isotope-item{pointer-events:none;z-index:1}
@@ -7,8 +8,8 @@
 .isotope{-webkit-transition-property:height,width;-moz-transition-property:height,width;-ms-transition-property:height,width;-o-transition-property:height,width;transition-property:height,width}
 .isotope .isotope-item{-webkit-transition-property:-webkit-transform,opacity;-moz-transition-property:-moz-transform,opacity;-ms-transition-property:-ms-transform,opacity;-o-transition-property:-o-transform,opacity;transition-property:transform,opacity}
 .isotope.no-transition,.isotope.no-transition .isotope-item,.isotope .isotope-item.no-transition{-webkit-transition-duration:0;-moz-transition-duration:0;-ms-transition-duration:0;-o-transition-duration:0;transition-duration:0}
-@font-face{font-family:'4000heavy_left';src:url("font/4000-heavy_left-webfont.eot");src:url("font/4000-heavy_left-webfont.eot?#iefix") format('embedded-opentype'),url("font/4000-heavy_left-webfont.woff") format('woff'),url("font/4000-heavy_left-webfont.ttf") format('truetype'),url("font/4000-heavy_left-webfont.svg#4000heavy_left") format('svg');font-weight:normal;font-style:normal}
-@font-face{font-family:'4000italic';src:url("font/4000-italic-webfont.eot");src:url("font/4000-italic-webfont.eot?#iefix") format('embedded-opentype'),url("font/4000-italic-webfont.woff") format('woff'),url("font/4000-italic-webfont.ttf") format('truetype'),url("font/4000-italic-webfont.svg#4000italic") format('svg');font-weight:normal;font-style:normal}
+@font-face{font-family:'4000heavy_left';src:url("http://webjay.github.io/rf13/gignal/lib/font/4000-heavy_left-webfont.eot");src:url("http://webjay.github.io/rf13/gignal/lib/font/4000-heavy_left-webfont.eot?#iefix") format('embedded-opentype'),url("http://webjay.github.io/rf13/gignal/lib/font/4000-heavy_left-webfont.woff") format('woff'),url("http://webjay.github.io/rf13/gignal/lib/font/4000-heavy_left-webfont.ttf") format('truetype'),url("http://webjay.github.io/rf13/gignal/lib/font/4000-heavy_left-webfont.svg#4000heavy_left") format('svg');font-weight:normal;font-style:normal}
+@font-face{font-family:'4000italic';src:url("http://webjay.github.io/rf13/gignal/lib/font/4000-italic-webfont.eot");src:url("http://webjay.github.io/rf13/gignal/lib/font/4000-italic-webfont.eot?#iefix") format('embedded-opentype'),url("http://webjay.github.io/rf13/gignal/lib/font/4000-italic-webfont.woff") format('woff'),url("http://webjay.github.io/rf13/gignal/lib/font/4000-italic-webfont.ttf") format('truetype'),url("http://webjay.github.io/rf13/gignal/lib/font/4000-italic-webfont.svg#4000italic") format('svg');font-weight:normal;font-style:normal}
 #gignal-stream .pull-left{float:left}
 #gignal-stream .pull-right{float:right}
 #gignal-stream .lcase{text-transform:lowercase}
