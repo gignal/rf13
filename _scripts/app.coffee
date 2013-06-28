@@ -91,7 +91,11 @@ class Stream extends Backbone.Collection
       sinceTime = _.max(@pluck('saved_on'))
       # hack until issue #49 is fixed
       if not _.isFinite sinceTime
-        sinceTime = Math.round(+new Date() / 1000) - (2 * 60 * 60)
+        # one hour in milliseconds
+        past = 60 * 60 * 1000
+        # floor by past then subtract past
+        sinceTime = (past * (Math.floor(+new Date() / past))) - past
+        sinceTime = Math.ceil sinceTime / 1000
         #sinceTime = 0
       offset = 0
     else
@@ -105,7 +109,7 @@ class Stream extends Backbone.Collection
       jsonpCallback: 'callme'
       data:
         limit: @parameters.limit
-        offset: offset
+        offset: offset if offset
         sinceTime: sinceTime if _.isFinite sinceTime
         #cid: @parameters.cid += 1
       success: =>
