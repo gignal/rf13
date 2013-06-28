@@ -135,7 +135,7 @@ Stream = (function(_super) {
   };
 
   Stream.prototype.update = function(append) {
-    var offset, past, sinceTime,
+    var offset, sinceTime,
       _this = this;
     this.append = append;
     if (this.calling) {
@@ -148,9 +148,7 @@ Stream = (function(_super) {
     if (!this.append) {
       sinceTime = _.max(this.pluck('saved_on'));
       if (!_.isFinite(sinceTime)) {
-        past = 60 * 60 * 1000;
-        sinceTime = (past * (Math.floor(+new Date() / past))) - past;
-        sinceTime = Math.ceil(sinceTime / 1000);
+        sinceTime = null;
       }
       offset = 0;
     } else {
