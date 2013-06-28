@@ -11,7 +11,5 @@ jQuery ($) ->
     url: 'http://api.gignal.com/event/api/uuid/' + $('#gignal-widget').data('eventid') + '?callback=?'
 
 
-  $('a[href^="http"]').attr 'target', '_blank'
-
   $(window).on 'scrollBottom', offsetY: -100, ->
     document.gignal.stream.update true

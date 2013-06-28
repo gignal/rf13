@@ -9,7 +9,7 @@ class Post extends Backbone.Model
 
   getData: =>
     text = @get 'text'
-    text = text.replace @re_links, '<a href="$1">link</a>'
+    text = text.replace @re_links, '<a href="$1" target="_blank">link</a>'
     text = null if text.indexOf(' ') is -1
     username = @get 'username'
     username = null if username.indexOf(' ') isnt -1
@@ -68,7 +68,6 @@ class Stream extends Backbone.Collection
     document.gignal.widget.$el[method](view.render().el).isotope('reloadItems').isotope 
       sortBy: 'original-order'
     document.gignal.widget.refresh()
-    $('a[href^="http"]').attr 'target', '_blank'
     
     
   parse: (response) ->
@@ -85,6 +84,7 @@ class Stream extends Backbone.Collection
       # hack until issue #49 is fixed
       if not _.isFinite sinceTime
         sinceTime = Math.round(+new Date() / 1000) - (2 * 60 * 60)
+        #sinceTime = 0
       offset = 0
     else
       sinceTime = _.min(@pluck('saved_on'))
@@ -113,6 +113,10 @@ class Stream extends Backbone.Collection
 
 
   setIntervalUpdate: ->
-    window.setInterval ->
-      document.gignal.stream.update()
-    , 4800
+    sleep = 5000
+    # ceil by 5sec then add 5sec
+    start = (sleep * (Math.floor(+new Date() / sleep))) + sleep
+    window.setTimeout ->
+      sleep = 5000
+      window.setInterval document.gignal.stream.update, sleep
+    , start
