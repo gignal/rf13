@@ -89,14 +89,13 @@ class Stream extends Backbone.Collection
     @calling = true
     if not @append
       sinceTime = _.max(@pluck('saved_on'))
-      # hack until issue #49 is fixed
       if not _.isFinite sinceTime
-        # one hour in milliseconds
-        past = 60 * 60 * 1000
-        # floor by past then subtract past
-        sinceTime = (past * (Math.floor(+new Date() / past))) - past
-        sinceTime = Math.ceil sinceTime / 1000
-        #sinceTime = 0
+        # # one hour in milliseconds
+        # past = 60 * 60 * 1000
+        # # floor by past then subtract past
+        # sinceTime = (past * (Math.floor(+new Date() / past))) - past
+        # sinceTime = Math.ceil sinceTime / 1000
+        sinceTime = null
       offset = 0
     else
       sinceTime = _.min(@pluck('saved_on'))
