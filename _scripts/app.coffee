@@ -76,8 +76,16 @@ class Stream extends Backbone.Collection
   comparator: (item) ->
     return - item.get 'saved_on'
 
+  isScrolledIntoView: (elem) ->
+    docViewTop = $(window).scrollTop()
+    docViewBottom = docViewTop + $(window).height()
+    elemTop = $(elem).offset().top
+    elemBottom = elemTop + $(elem).height()
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop))
+
   update: (@append) =>
     return if @calling
+    return if not @append and not @isScrolledIntoView '#gignal-stream header'
     @calling = true
     if not @append
       sinceTime = _.max(@pluck('saved_on'))
@@ -89,7 +97,7 @@ class Stream extends Backbone.Collection
     else
       sinceTime = _.min(@pluck('saved_on'))
       offset = @parameters.offset += @parameters.limit
-    sinceTimeCall = _.max(@pluck('saved_on'))
+    #sinceTimeCall = _.max(@pluck('saved_on'))
     @fetch
       remove: false
       cache: true
@@ -109,7 +117,9 @@ class Stream extends Backbone.Collection
         if response.statusText is 'timeout'
           @calling = false
         else
-          location.reload true
+          window.setTimeout ->
+            location.reload true
+          , 10000
 
 
   setIntervalUpdate: ->

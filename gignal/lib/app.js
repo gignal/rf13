@@ -125,11 +125,23 @@ Stream = (function(_super) {
     return -item.get('saved_on');
   };
 
+  Stream.prototype.isScrolledIntoView = function(elem) {
+    var docViewBottom, docViewTop, elemBottom, elemTop;
+    docViewTop = $(window).scrollTop();
+    docViewBottom = docViewTop + $(window).height();
+    elemTop = $(elem).offset().top;
+    elemBottom = elemTop + $(elem).height();
+    return (elemBottom <= docViewBottom) && (elemTop >= docViewTop);
+  };
+
   Stream.prototype.update = function(append) {
-    var offset, sinceTime, sinceTimeCall,
+    var offset, sinceTime,
       _this = this;
     this.append = append;
     if (this.calling) {
+      return;
+    }
+    if (!this.append && !this.isScrolledIntoView('#gignal-stream header')) {
       return;
     }
     this.calling = true;
@@ -143,7 +155,6 @@ Stream = (function(_super) {
       sinceTime = _.min(this.pluck('saved_on'));
       offset = this.parameters.offset += this.parameters.limit;
     }
-    sinceTimeCall = _.max(this.pluck('saved_on'));
     return this.fetch({
       remove: false,
       cache: true,
@@ -161,7 +172,9 @@ Stream = (function(_super) {
         if (response.statusText === 'timeout') {
           return _this.calling = false;
         } else {
-          return location.reload(true);
+          return window.setTimeout(function() {
+            return location.reload(true);
+          }, 10000);
         }
       }
     });
