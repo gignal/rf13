@@ -24,7 +24,7 @@ Post = (function(_super) {
     var data, direct, text, username,
       _this = this;
     text = this.get('text');
-    text = text.replace(this.re_links, '<a href="$1">link</a>');
+    text = text.replace(this.re_links, '<a href="$1" target="_blank">link</a>');
     if (text.indexOf(' ') === -1) {
       text = null;
     }
@@ -44,7 +44,6 @@ Post = (function(_super) {
         if (!direct) {
           this.set('direct_url', '#');
           $.getJSON('https://api.instagram.com/v1/media/' + this.get('original_id') + '?client_id=3ebcc844a6df41169c1955e0f75d6fce&callback=?').done(function(response) {
-            console.log(response);
             if (response.data != null) {
               return _this.set('direct_url', response.data.link);
             }
@@ -115,8 +114,7 @@ Stream = (function(_super) {
     document.gignal.widget.$el[method](view.render().el).isotope('reloadItems').isotope({
       sortBy: 'original-order'
     });
-    document.gignal.widget.refresh();
-    return $('a[href^="http"]').attr('target', '_blank');
+    return document.gignal.widget.refresh();
   };
 
   Stream.prototype.parse = function(response) {
@@ -170,9 +168,13 @@ Stream = (function(_super) {
   };
 
   Stream.prototype.setIntervalUpdate = function() {
-    return window.setInterval(function() {
-      return document.gignal.stream.update();
-    }, 4800);
+    var sleep, start;
+    sleep = 5000;
+    start = (sleep * (Math.floor(+new Date() / sleep))) + sleep;
+    return window.setTimeout(function() {
+      sleep = 5000;
+      return window.setInterval(document.gignal.stream.update, sleep);
+    }, start);
   };
 
   return Stream;
@@ -303,7 +305,6 @@ jQuery(function($) {
   document.gignal.stream = new Stream([], {
     url: 'http://api.gignal.com/event/api/uuid/' + $('#gignal-widget').data('eventid') + '?callback=?'
   });
-  $('a[href^="http"]').attr('target', '_blank');
   return $(window).on('scrollBottom', {
     offsetY: -100
   }, function() {
