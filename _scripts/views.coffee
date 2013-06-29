@@ -46,6 +46,11 @@ class document.gignal.views.PhotoBox extends Backbone.View
   className: 'gignal-outerbox'
   initialize: ->
     @listenTo @model, 'change', @render
+    # image exist?
+    img = new Image()
+    img.src = @model.get 'large_photo'
+    img.onerror = =>
+      document.gignal.widget.$el.isotope 'remove', @$el
   render: =>
     # set width
     @$el.css 'width', document.gignal.widget.columnWidth
