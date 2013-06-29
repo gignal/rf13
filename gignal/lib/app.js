@@ -256,6 +256,8 @@ document.gignal.views.TextBox = (function(_super) {
     this.$el.css('width', document.gignal.widget.columnWidth);
     if (this.model.get('admin_entry')) {
       this.$el.addClass('gignal-owner');
+    } else if (this.model.get('username' === 'roskildefestival' && this.model.get('service' === 'Instagram'))) {
+      this.$el.addClass('gignal-owner');
     }
     data = this.model.getData();
     if (!data.message) {
@@ -292,6 +294,8 @@ document.gignal.views.PhotoBox = (function(_super) {
     var data;
     this.$el.css('width', document.gignal.widget.columnWidth);
     if (this.model.get('admin_entry')) {
+      this.$el.addClass('gignal-owner');
+    } else if (this.model.get('username' === 'roskildefestival' && this.model.get('service' === 'Instagram'))) {
       this.$el.addClass('gignal-owner');
     }
     data = this.model.getData();

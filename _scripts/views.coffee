@@ -31,6 +31,8 @@ class document.gignal.views.TextBox extends Backbone.View
     @$el.css 'width', document.gignal.widget.columnWidth
     if @model.get 'admin_entry'
       @$el.addClass 'gignal-owner'
+    else if @model.get 'username' is 'roskildefestival' and @model.get 'service' is 'Instagram'
+      @$el.addClass 'gignal-owner'
     data = @model.getData()
     if not data.message
       document.gignal.widget.$el.isotope 'remove', @$el
@@ -49,6 +51,8 @@ class document.gignal.views.PhotoBox extends Backbone.View
     @$el.css 'width', document.gignal.widget.columnWidth
     # owner?
     if @model.get 'admin_entry'
+      @$el.addClass 'gignal-owner'
+    else if @model.get 'username' is 'roskildefestival' and @model.get 'service' is 'Instagram'
       @$el.addClass 'gignal-owner'
     # get data
     data = @model.getData()
