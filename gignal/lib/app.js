@@ -287,7 +287,14 @@ document.gignal.views.PhotoBox = (function(_super) {
   PhotoBox.prototype.className = 'gignal-outerbox';
 
   PhotoBox.prototype.initialize = function() {
-    return this.listenTo(this.model, 'change', this.render);
+    var img,
+      _this = this;
+    this.listenTo(this.model, 'change', this.render);
+    img = new Image();
+    img.src = this.model.get('large_photo');
+    return img.onerror = function() {
+      return document.gignal.widget.$el.isotope('remove', _this.$el);
+    };
   };
 
   PhotoBox.prototype.render = function() {
