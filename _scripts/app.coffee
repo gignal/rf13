@@ -1,4 +1,4 @@
-document.gignal = 
+document.gignal =
   views: {}
 
 
@@ -18,14 +18,14 @@ class Post extends Backbone.Model
         direct = 'http://twitter.com/' + username + '/status/' + @get 'original_id'
       when 'Facebook'
         direct = 'http://facebook.com/' + @get 'original_id'
-      when 'Instagram'
-        direct = @get 'direct_url'
-        if not direct
-          @set 'direct_url', '#'
-          $.getJSON('https://api.instagram.com/v1/media/' + @get('original_id') + '?client_id=3ebcc844a6df41169c1955e0f75d6fce&callback=?')
-          .done (response) =>
-            if response.data?
-              @set 'direct_url', response.data.link
+      # when 'Instagram'
+      #   direct = @get 'direct_url'
+      #   if not direct
+      #     @set 'direct_url', '#'
+      #     $.getJSON('https://api.instagram.com/v1/media/' + @get('original_id') + '?client_id=3ebcc844a6df41169c1955e0f75d6fce&callback=?')
+      #     .done (response) =>
+      #       if response.data?
+      #         @set 'direct_url', response.data.link
       else
         direct = '#'
     data =
@@ -41,7 +41,7 @@ class Post extends Backbone.Model
 
 
 class Stream extends Backbone.Collection
-  
+
   model: Post
 
   calling: false
@@ -65,14 +65,14 @@ class Stream extends Backbone.Collection
         view = new document.gignal.views.PhotoBox
           model: model
     method = if not @append then 'prepend' else 'append'
-    document.gignal.widget.$el[method](view.render().el).isotope('reloadItems').isotope 
+    document.gignal.widget.$el[method](view.render().el).isotope('reloadItems').isotope
       sortBy: 'original-order'
     document.gignal.widget.refresh()
-    
-    
+
+
   parse: (response) ->
     return response.stream
-    
+
   comparator: (item) ->
     return - item.get 'saved_on'
 

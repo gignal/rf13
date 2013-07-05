@@ -15,5 +15,5 @@ npm-debug.log
 
 .DS_Store
 
-components
+bower_components
 node_modules

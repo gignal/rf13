@@ -1,7 +1,7 @@
 module.exports = (grunt) ->
 
   grunt.initConfig
-  
+
     coffee:
       compileWithMaps:
         options:
@@ -20,7 +20,7 @@ module.exports = (grunt) ->
         options:
           defaultName: (filename) ->
             filename.split('/').pop().split('.').shift()
-        files: 
+        files:
           'gignal/lib/templates.js': [
             '_scripts/*.mustache'
           ]
@@ -33,14 +33,14 @@ module.exports = (grunt) ->
         mangle: false
         #wrap: 'gignal'
       app:
-        files: 
+        files:
           'gignal/lib/app.min.js': [
-            'components/underscore/underscore.js'
-            'components/backbone/backbone.js'
-            'components/isotope/jquery.isotope.js'
-            'components/humane-dates/humane.js'
-            'components/scrollbottom/src/jquery.scrollbottom.js'
-            'components/hogan/web/builds/2.0.0/template-2.0.0.js'
+            'bower_components/underscore/underscore.js'
+            'bower_components/backbone/backbone.js'
+            'bower_components/isotope/jquery.isotope.js'
+            'bower_components/humane-dates/humane.js'
+            'bower_components/scrollbottom/src/jquery.scrollbottom.js'
+            'bower_components/hogan/web/builds/2.0.0/template-2.0.0.js'
             'gignal/lib/templates.js'
             'gignal/lib/app.js'
           ]
@@ -49,7 +49,7 @@ module.exports = (grunt) ->
       compile:
         options:
           paths: ['gignal/lib']
-        files: 
+        files:
           'gignal/lib/style.min.css': [
             '_scripts/style.styl'
           ]

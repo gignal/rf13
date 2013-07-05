@@ -6,7 +6,7 @@ class document.gignal.views.Event extends Backbone.View
     itemSelector: '.gignal-outerbox'
     layoutMode: 'masonry'
     sortAscending: true
-    
+
   initialize: ->
     # set Isotope masonry columnWidth
     radix = 10
@@ -31,7 +31,7 @@ class document.gignal.views.TextBox extends Backbone.View
     @$el.css 'width', document.gignal.widget.columnWidth
     if @model.get 'admin_entry'
       @$el.addClass 'gignal-owner'
-    else if @model.get 'username' is 'roskildefestival' and @model.get 'service' is 'Instagram'
+    else if @model.get('username') is 'roskildefestival' and @model.get('service') is 'Instagram'
       @$el.addClass 'gignal-owner'
     data = @model.getData()
     if not data.message
@@ -44,6 +44,8 @@ class document.gignal.views.TextBox extends Backbone.View
 class document.gignal.views.PhotoBox extends Backbone.View
   tagName: 'div'
   className: 'gignal-outerbox'
+  events:
+    'click a.direct': 'linksta'
   initialize: ->
     @listenTo @model, 'change', @render
     # image exist?
@@ -69,3 +71,10 @@ class document.gignal.views.PhotoBox extends Backbone.View
     @$el.html Templates.photo.render @model.getData(),
       footer: Templates.footer
     return @
+  linksta: (event) =>
+    if @model.get('service') is 'Instagram'
+      event.preventDefault()
+      $.getJSON('https://api.instagram.com/v1/media/' + @model.get('original_id') + '?client_id=3ebcc844a6df41169c1955e0f75d6fce&callback=?')
+      .done (response) =>
+        if response.data?
+          window.open response.data.link, '_blank'
