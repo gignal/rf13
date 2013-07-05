@@ -21,8 +21,7 @@ Post = (function(_super) {
   Post.prototype.re_links = /((http|https)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?)/g;
 
   Post.prototype.getData = function() {
-    var data, direct, text, username,
-      _this = this;
+    var data, direct, text, username;
     text = this.get('text');
     text = text.replace(this.re_links, '<a href="$1" target="_blank">link</a>');
     if (text.indexOf(' ') === -1) {
@@ -38,17 +37,6 @@ Post = (function(_super) {
         break;
       case 'Facebook':
         direct = 'http://facebook.com/' + this.get('original_id');
-        break;
-      case 'Instagram':
-        direct = this.get('direct_url');
-        if (!direct) {
-          this.set('direct_url', '#');
-          $.getJSON('https://api.instagram.com/v1/media/' + this.get('original_id') + '?client_id=3ebcc844a6df41169c1955e0f75d6fce&callback=?').done(function(response) {
-            if (response.data != null) {
-              return _this.set('direct_url', response.data.link);
-            }
-          });
-        }
         break;
       default:
         direct = '#';
@@ -256,7 +244,7 @@ document.gignal.views.TextBox = (function(_super) {
     this.$el.css('width', document.gignal.widget.columnWidth);
     if (this.model.get('admin_entry')) {
       this.$el.addClass('gignal-owner');
-    } else if (this.model.get('username' === 'roskildefestival' && this.model.get('service' === 'Instagram'))) {
+    } else if (this.model.get('username') === 'roskildefestival' && this.model.get('service') === 'Instagram') {
       this.$el.addClass('gignal-owner');
     }
     data = this.model.getData();
@@ -277,6 +265,7 @@ document.gignal.views.PhotoBox = (function(_super) {
   __extends(PhotoBox, _super);
 
   function PhotoBox() {
+    this.linksta = __bind(this.linksta, this);
     this.render = __bind(this.render, this);
     _ref4 = PhotoBox.__super__.constructor.apply(this, arguments);
     return _ref4;
@@ -285,6 +274,10 @@ document.gignal.views.PhotoBox = (function(_super) {
   PhotoBox.prototype.tagName = 'div';
 
   PhotoBox.prototype.className = 'gignal-outerbox';
+
+  PhotoBox.prototype.events = {
+    'click a.direct': 'linksta'
+  };
 
   PhotoBox.prototype.initialize = function() {
     var img,
@@ -314,6 +307,18 @@ document.gignal.views.PhotoBox = (function(_super) {
       footer: Templates.footer
     }));
     return this;
+  };
+
+  PhotoBox.prototype.linksta = function(event) {
+    var _this = this;
+    if (this.model.get('service') === 'Instagram') {
+      event.preventDefault();
+      return $.getJSON('https://api.instagram.com/v1/media/' + this.model.get('original_id') + '?client_id=3ebcc844a6df41169c1955e0f75d6fce&callback=?').done(function(response) {
+        if (response.data != null) {
+          return window.open(response.data.link, '_blank');
+        }
+      });
+    }
   };
 
   return PhotoBox;
