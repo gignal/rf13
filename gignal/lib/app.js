@@ -157,23 +157,17 @@ Stream = (function(_super) {
         return _this.calling = false;
       },
       error: function(c, response) {
-        if (response.statusText === 'timeout') {
-          return _this.calling = false;
-        } else {
-          return window.setTimeout(function() {
-            return location.reload(true);
-          }, 10000);
-        }
+        return _this.calling = false;
       }
     });
   };
 
   Stream.prototype.setIntervalUpdate = function() {
     var sleep, start;
-    sleep = 5000;
+    sleep = 10000;
     start = (sleep * (Math.floor(+new Date() / sleep))) + sleep;
     return window.setTimeout(function() {
-      sleep = 5000;
+      sleep = 10000;
       return window.setInterval(document.gignal.stream.update, sleep);
     }, start);
   };

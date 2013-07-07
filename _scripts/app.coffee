@@ -117,19 +117,20 @@ class Stream extends Backbone.Collection
         # if sinceTimeCall isnt _.max(@pluck('saved_on'))
         #   @parameters.cid = 0
       error: (c, response) =>
-        if response.statusText is 'timeout'
-          @calling = false
-        else
-          window.setTimeout ->
-            location.reload true
-          , 10000
+        @calling = false
+        # if response.statusText is 'timeout'
+        #   @calling = false
+        # else
+        #   window.setTimeout ->
+        #     location.reload true
+        #   , 10000
 
 
   setIntervalUpdate: ->
-    sleep = 5000
+    sleep = 10000
     # floor by 5sec then add 5sec
     start = (sleep * (Math.floor(+new Date() / sleep))) + sleep
     window.setTimeout ->
-      sleep = 5000
+      sleep = 10000
       window.setInterval document.gignal.stream.update, sleep
     , start
